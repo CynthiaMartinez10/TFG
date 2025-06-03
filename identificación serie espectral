@@ -1,0 +1,18 @@
+import numpy as np
+from scipy.optimize import fsolve
+
+C = 1.028 #es la raiz cuadrada del cociente lamda_i y lamda_(i+1)
+B=1.056#es el cociente lambda_i y lambda_i+1
+def ecuacion(x):
+    return (np.sqrt(1-4/(x+1)**2))/(np.sqrt(1-4/(x)**2)) - C
+
+solucion = fsolve(ecuacion, x0 = 4)
+print("La solución es:", solucion[0])#solución para el caso Balmer
+def ecuacionB(x):
+    return (1-1/(x+1)**2)/(1-1/x**2) - B
+solucion=fsolve(ecuacionB, x0=2)
+print("ni=", solucion[0])
+def ecuacionL(x):
+    return (x**3 * (x + 2)) / ((x + 1)**3 * (x - 1)) - B
+solucion = fsolve(ecuacionL, x0 = 2)
+print("La solución es:", solucion[0])# solución para el caso Lyman
